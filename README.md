@@ -2,14 +2,14 @@
 겉으로만 안다고 생각하고 대충 넘어갔던 다양한 문제들을 정리하는 저장소.
 아래 링크의 키워드를 참고하여 학습한 뒤, 나에게 맞는 형태로 정리
 
-**깃 허브 링크**
-https://github.com/JeaSungLEE/iOSInterviewquestions
+각 레벨 혹은 파트 등이 작성이 완료되면 각자의 정리된 내용을 보고 생각을 교류하는 시간을 가진다.
+위 일정이 지난 후 학습 내용에 대한 회고록을 작성한다. 
 
 **구성**
-- CS: 운영체제, 메모리, 하드디스크 등 하드웨어 및 소프트웨어의 구조와 동작방식에 관한 질문
-- IOS: Swift, Xcode, Framework 등 앱을 제작하기위해 실제로 사용되는 기술들에 대한 질문
-- Etc: Git, Human Interface Guidelines 및 개발에 도움을 주는 도구(Postman, Zeplin, Trello)들의 소개 및 사용법 정리
-- Resource: 문서에서 사용된 이미지, 영상, 텍스트 저장소
+- [iOS InterView Questions](https://github.com/JeaSungLEE/iOSInterviewquestions/tree/master)
+
+    0레벨 작성 기한: 2024년 5월 6일 
+
 
 
 **함께보면 유용한 사이트들**
