@@ -96,7 +96,7 @@ AMD에 의해 고안된 64비트 CPU 아키텍처 구조.
 *아이폰 5s 에 탑재된 A7*
 arm32 에 대한 호환성을 지원하며, 더 큰 레지스터 크기와 확장된 `명령어 세트`를 지원해 더 높은 성능을 제공한다.
 
-**32bit 와 64bit 의 차이**
+**32bit 와 64bit 의 차이**  
 왜 32비트 프로세서보다 64비트 프로세서가 좋다고 말하는걸까?
 
 `n비트 프로세서` 에서 말하는 `n` 은 CPU 가 처리하는 데이터의 최소 단위인 레지스터의 크기가 몇 bit 인가를 의미하는 것이다.
@@ -141,25 +141,30 @@ AP는 시스템이 칩안에 모두 내장되었다고해서 **SOC(System On Chi
 1. 삼성의 엑시노스(Exynos)
 ![엑시노스](../resource/imgExynos2.jpg)
 *엑시노스*
+
 삼성이 설계 및 생산을하며, 주로 갤럭시 시리즈에 탑재된다.
 
 2. 애플의 A시리즈
 ![A17 pro](../resource/imgAppleA17Pro.webp)
 *A17 pro*
+
 애플사의 iPhone 에 주로 탑재되며, 애플사에서 만든 기기에만 탑재된다는 특징이 있다.
 
 3. 퀄컴의 스냅드래곤(Snapdragon)
 ![Snapdragon Gen 3](../resource/imgSnapdragonGen3.jpg)
 *Snapdragon Gen 3*
+
 안드로이드 운영체제가 탑재된 스마트폰에 대거 탑재되어왔으며, 최근 미디어텍 사에서 만든 디멘시티의 급격한 성장으로 점유율이 줄어들었다.
 
 
 4. 엔비디아의 테그라(Tegra)
 ![테그라 X1](../resource/imgTegraX1.jpg)
 *테그라 x1*
+
 엔비디아에서 만든 AP인 Tegra 시리즈는 그래픽 연산에 특화되어있으며, 
 해당 AP를 탑재한 대표적 기기 중 하나는 닌텐도사의 Switch 가 있다.
 
+<br>
 
 # 참고
 - https://ko.wikipedia.org/wiki/%EC%BA%90%EC%8B%9C (캐시란)
