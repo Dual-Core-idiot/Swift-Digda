@@ -45,7 +45,7 @@
     - arm64
         - arm 기반의 64Bit CPU를 의미한다.
         - arm 32Bit의 명령어를 모두 호환하는 특징이 있다.
-        - Window, Linux, Mac OS(M1 이전) 지원을 한다.
+        - Window 11버전 이후, Linux, Mac OS(M1 Mac 이후), Android, iOS 지원을 한다.
         
 - iOS 기기에서 사용되는 AP(Application Processor)의 특징과 역할에 대해 설명해주세요.
     - 특징
