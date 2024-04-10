@@ -78,9 +78,9 @@ CPU 내에 탑재될 코어와 캐시의 배치부터, 트랜지스터 사이의
 1985년 인텔에서 출시한 최초의 32비트 프로세서인 `80386` 가 채택한 CPU 아키텍처 구조.
 이 설계 방식에 맞게 만들어진 프로세서들을 `x86 프로세서`라고 칭한다.
 
-- x86_64(= amd64)
+- x86_64(= amd64, IA-64)
 AMD에 의해 고안된 64비트 CPU 아키텍처 구조.
-`32비트` 응용 프로그램에서도 호환되도록 설계되었다.
+`32비트` 응용 프로그램에서도 호환되도록 설계되었다. (IA-64 는 해당X)
 ![인텔 코어 i 프로세서](../resource/imgIntelCorei5.jpg)
 *x86_64을 대표하는 인텔사의 코어 i 프로세서*
 
@@ -96,12 +96,69 @@ AMD에 의해 고안된 64비트 CPU 아키텍처 구조.
 *아이폰 5s 에 탑재된 A7*
 arm32 에 대한 호환성을 지원하며, 더 큰 레지스터 크기와 확장된 `명령어 세트`를 지원해 더 높은 성능을 제공한다.
 
+**32bit 와 64bit 의 차이**
+왜 32비트 프로세서보다 64비트 프로세서가 좋다고 말하는걸까?
+
+`n비트 프로세서` 에서 말하는 `n` 은 CPU 가 처리하는 데이터의 최소 단위인 레지스터의 크기가 몇 bit 인가를 의미하는 것이다.
+
+1. 처리할 수 있는 데이터의 크기
+- 32비트 프로세서: 한번에 처리할 수 있는 데이터가 `2의 32승`(= 4,294,967,296) 이지만,
+- 64비트 프로세서: `2의 64승`(= 18,446,744,073,709,551,616) 이다.
+> 64비트 프로세서는 한번에 처리가능한 데이터가 크기때문에 연산 속도가 빠르다.
+
+
+2. 주소할당 제한 문제
+- 32비트 프로세서: 약 `4GB` 정도의 메모리 인식이가능하다.
+- 64비트 프로세서: 약 `16EB(Exa Byte)` 정도의 메모리 인식이 가능하다.
+> 64비트 프로세서는 현시점 무한대에 가까운 메모리 인식이 가능하다.
+
+<br>
+
 ### 
 
 # iOS 기기에서 사용되는 AP
 ### AP(Application Processor) 란?
+모바일 기기에 탑재되어 **주 연산을 담당**하는 칩을 AP 라고 부른다.
+2008년 출시된 아이폰을 기점으로 모바일 시장이 급격하게 커지면서 그만큼 AP에 대한 중요성도 커졌다.
+</br>
+
 ### AP의 특징과 역할
+![모바일 AP의 구조](../resource/imgAPInside1.jpeg)
+*모바일 AP의 구조*
+
+데스크탑에 들어가는 CPU와 모바일 기기에 탑재되는 AP를 서로 구분하는 이유는
+CPU는 연산만 담당하지만, AP는 연산뿐만아니라 그래픽을 처리하고, 5G 나 4G 등 인터넷을 연결(**MODEM**) 하고, 카메라 이미지를 처리(**ISP**)하고, 음성 및 영상 신호를 처리(DSP) 하는 등 수많은 기능이 한데 모아졌기 때문이다.
+
+AP는 시스템이 칩안에 모두 내장되었다고해서 **SOC(System On Chip)** 이라고도 부른다.
+
 ### AP의 종류
+다양한 제조사에서 다양한 스마트폰을 출시하는만큼 AP의 종류도 다양하다.
+![AP 점유율](../resource/imgApPercentage.webp)
+*다양한 제조사의 AP 점유율 (2020년 3분기 기준)*
+
+
+
+1. 삼성의 엑시노스(Exynos)
+![엑시노스](../resource/imgExynos2.jpg)
+*엑시노스*
+삼성이 설계 및 생산을하며, 주로 갤럭시 시리즈에 탑재된다.
+
+2. 애플의 A시리즈
+![A17 pro](../resource/imgAppleA17Pro.webp)
+*A17 pro*
+애플사의 iPhone 에 주로 탑재되며, 애플사에서 만든 기기에만 탑재된다는 특징이 있다.
+
+3. 퀄컴의 스냅드래곤(Snapdragon)
+![Snapdragon Gen 3](../resource/imgSnapdragonGen3.jpg)
+*Snapdragon Gen 3*
+안드로이드 운영체제가 탑재된 스마트폰에 대거 탑재되어왔으며, 최근 미디어텍 사에서 만든 디멘시티의 급격한 성장으로 점유율이 줄어들었다.
+
+
+4. 엔비디아의 테그라(Tegra)
+![테그라 X1](../resource/imgTegraX1.jpg)
+*테그라 x1*
+엔비디아에서 만든 AP인 Tegra 시리즈는 그래픽 연산에 특화되어있으며, 
+해당 AP를 탑재한 대표적 기기 중 하나는 닌텐도사의 Switch 가 있다.
 
 
 # 참고
@@ -118,3 +175,10 @@ arm32 에 대한 호환성을 지원하며, 더 큰 레지스터 크기와 확�
 - https://bulletproofyuri.tistory.com/5 (CPU 아키텍처)
 - https://ko.wikipedia.org/wiki/X86 (x86)
 - https://www.anandtech.com/show/7304/apple-announces-a7-worlds-first-64bit-smartphone-soc (A7)
+- https://bluese05.tistory.com/17 (Window ghksruddptj 32bit 와 64bit)
+- https://blog.naver.com/rlarudfbf12/220346647271 (32비트 64비트? 윈도우의 4GB 메모리 인식 한계란 과연 무엇인가?)
+- https://news.samsung.com/kr/482 (AP 란 무엇인가?)
+- https://news.skhynix.co.kr/post/mobile-not-cpu (CPU가 아니라 모바일 AP라 불리는 이유)
+- https://trts1004.tistory.com/12108872 (ISP의 개요)
+- https://greedyourlife.com/entry/%EC%8A%A4%EB%A7%88%ED%8A%B8%ED%8F%B0-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%ED%94%84%EB%A1%9C%EC%84%B8%EC%84%9CAP%EB%9E%80 (애플리케이션 프로세서란)
+- https://semiconductor.samsung.com/kr/support/tools-resources/dictionary/semiconductor-glossary-dsp/ (DSP 란)
