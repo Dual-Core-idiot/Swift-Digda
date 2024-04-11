@@ -1,7 +1,6 @@
 # 2. 운영체제의 역할과 iOS에서의 운영체제 구조에 대해 설명해주세요.
 
 
-- 
 <details>
     <summary>프로세스와 스레드의 차이점, iOS에서의 프로세스와 스레드 관리 방법에 대해 설명해주세요.</summary>
 
@@ -58,11 +57,31 @@
         
         
         --iOS에서의 프로세스, 스레드 관리 방법--
+        iOS는 프로세스 자원 할당 시스템을 Time Sharing System을 채택하여 사용 중이고, 효율적인 메모리와 CPU 연산을 위해 I/O 작업 시 대기하지 않고 다른 연산을 진행하다가 I/O 작업이 완료되면 연산을 진행합니다.
+
+        OS는 잘 사용하지 않는 Process의 Memory를 Disk로 내려버립니다(Swap Out). 이때 Process가 Ready 상태에서 Swap Out하면 Suspended Ready 상태가 되고, Blocked 상태에서 Swap Out하면 Suspended Block 상태가 됩니다. 이 두 상태에서 나중에 필요에 의해 Swap In하여 다시 Memory에 load 되어집니다.
+
+        iOS에서는 스레드를 관리하기 위해 GCD(Grand Central Dispatch)를 제작하여 배포하는데.
+
+        그 이유는 스레드 관리의 복잡성을 신경 쓰지 않고도 비동기 작업을 쉽게 구현할 수 있게 하고, 효율적인 시스템 자원 사용을 위해 시스템 수준에서 스레드 풀을 관리합니다.
+
+        GCD는 스레드마다 중요도를 설정하여 리소스를 할당할 수 있게 도움을 줍니다.
 </details>
         
-        
-- 메모리 관리 기법 중 iOS에서 사용되는 방식과 그 특징에 대해 설명해주세요.
+
+<details>
+    <summary>메모리 관리 기법 중 iOS에서 사용되는 방식과 그 특징에 대해 설명해주세요.</summary>
     
+        iOS에서 사용되는 메모리 기법은 ARC(Automatic Reference Counting)입니다.
+
+        Class, Struct 등 메모리에 데이터들을 할당할 때 참조가 되고 있지 않다면 Memory Leak(메모리 누수)가 발생하게 됩니다.
+
+        이를 해결하기 위해 위 같은 상황에서 메모리를 자동적으로 해지 해줍니다.
+
+        순환참조 (서로가 참조하고 있어서 Reference Count가 0이 되지않는 상황)이 발생하면 Memory Leak(메모리 누수)가 발생합니다.
+
+        위 상황을 해결하기 위해 Weak, Unowned를 추가하여 참조하더라도 RC를 상승시키지 않아 메모리 누수가 발생하지 않게 됩니다.
+</details>
     
 - iOS의 샌드박스(Sandbox) 개념과 역할, 앱 간 데이터 공유 방법에 대해 설명해주세요.
     
@@ -71,4 +90,5 @@
 > 참조 문헌
 프로세스, 스레드의 개념 : 
    [https://inpa.tistory.com/entry/👩‍💻-프로세스-⚔️-쓰레드-차이#프로세스_process](https://inpa.tistory.com/entry/%F0%9F%91%A9%E2%80%8D%F0%9F%92%BB-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%E2%9A%94%EF%B8%8F-%EC%93%B0%EB%A0%88%EB%93%9C-%EC%B0%A8%EC%9D%B4#%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_process)
+iOS의 프로세스 : https://medium.com/@audrl1010/process-in-ios-1-988078606cca
 >
