@@ -12,7 +12,7 @@
 캐시(Cache) 메모리는 컴퓨터 과학에서 데이터나 값을 미리 복사해 놓는 임시 장소를 가리킨다.
 
 
-![메모리 계층 구조](../resource/imgCacheMemory1.png){: width="200" height="100"}
+![메모리 계층 구조](../resource/level0_1/imgCacheMemory1.png){: width="200" height="100"}
 *메모리 계층 구조*
 
 프로세서가 사용할 데이터를 보관하는 가장 빠른 메모리인 `레지스터` 다음으로 빠른 메모리다.
@@ -28,9 +28,9 @@
 L은 Level을 의미하며 `L1` > `L2` > `L3` 순으로 성능이 좋지만 용량이 줄어든다.
 
 
-![캐시 레벨](../resource/imgCacheMemory2.png)
+![캐시 레벨](../resource/level0_1/imgCacheMemory2.png)
 *1 - 캐시 레벨*
-![캐시 레벨](../resource/imgCacheMemory4.jpeg)
+![캐시 레벨](../resource/level0_1/imgCacheMemory4.jpeg)
 *Cortex-A72의 캐시*
 
 일반적으로 `L1 캐시`는 각 코어마다 탑재되며 CPU 가 가장 먼저 접근하는 캐시이다. 여기서 원하는 데이터를 찾지 못하면 `L2 캐시` 로 넘어간다.
@@ -73,7 +73,7 @@ CPU 내에 탑재될 코어와 캐시의 배치부터, 트랜지스터 사이의
 명령어의 길이가 가변적이며, 복잡하지만 하나의 명령으로 복잡한 연산이 가능하다.
 주로 개인용 컴퓨터 및 서버, 메인프레임 등에서 사용된다.
 - x86(= 80x36)
-![인텔 80386 프로세서](../resource/img80386.jpg)
+![인텔 80386 프로세서](../resource/level0_1/img80386.jpg)
 *인텔 80386 프로세서*
 1985년 인텔에서 출시한 최초의 32비트 프로세서인 `80386` 가 채택한 CPU 아키텍처 구조.
 이 설계 방식에 맞게 만들어진 프로세서들을 `x86 프로세서`라고 칭한다.
@@ -81,18 +81,18 @@ CPU 내에 탑재될 코어와 캐시의 배치부터, 트랜지스터 사이의
 - x86_64(= amd64, IA-64)
 AMD에 의해 고안된 64비트 CPU 아키텍처 구조.
 `32비트` 응용 프로그램에서도 호환되도록 설계되었다. (IA-64 는 해당X)
-![인텔 코어 i 프로세서](../resource/imgIntelCorei5.jpg)
+![인텔 코어 i 프로세서](../resource/level0_1/imgIntelCorei5.jpg)
 *x86_64을 대표하는 인텔사의 코어 i 프로세서*
 
 **RISC 기반**
 명령어의 길이가 고정되어있으며, 단순하기에 빠른 명령어 처리가 가능하다.
 전력 소모가 적어 임베디드 시스템이나 모바일, iot 기기에 주로 사용된다.
 - arm
-![엑시노스 3110](../resource/imgExynos3110.jpg)
+![엑시노스 3110](../resource/level0_1/imgExynos3110.jpg)
 *갤럭시 s 에 탑재된 엑시노스 3110*
 
 - arm64
-![애플 A7](../resource/imgAppleA7.jpg)
+![애플 A7](../resource/level0_1/imgAppleA7.jpg)
 *아이폰 5s 에 탑재된 A7*
 arm32 에 대한 호환성을 지원하며, 더 큰 레지스터 크기와 확장된 `명령어 세트`를 지원해 더 높은 성능을 제공한다.
 
@@ -123,7 +123,7 @@ arm32 에 대한 호환성을 지원하며, 더 큰 레지스터 크기와 확�
 </br>
 
 ### AP의 특징과 역할
-![모바일 AP의 구조](../resource/imgAPInside1.jpeg)
+![모바일 AP의 구조](../resource/level0_1/imgAPInside1.jpeg)
 *모바일 AP의 구조*
 
 데스크탑에 들어가는 CPU와 모바일 기기에 탑재되는 AP를 서로 구분하는 이유는
@@ -133,13 +133,13 @@ AP는 시스템이 칩안에 모두 내장되었다고해서 **SOC(System On Chi
 
 ### AP의 종류
 다양한 제조사에서 다양한 스마트폰을 출시하는만큼 AP의 종류도 다양하다.
-![AP 점유율](../resource/imgApPercentage.webp)
+![AP 점유율](../resource/level0_1/imgApPercentage.webp)
 *다양한 제조사의 AP 점유율 (2020년 3분기 기준)*
 
 
 
 1. 삼성의 엑시노스(Exynos)
-![엑시노스](../resource/imgExynos2.jpg)
+![엑시노스](../resource/level0_1/imgExynos2.jpg)
 *엑시노스*
 
 삼성이 설계 및 생산을하며, 주로 갤럭시 시리즈에 탑재된다.
@@ -151,14 +151,14 @@ AP는 시스템이 칩안에 모두 내장되었다고해서 **SOC(System On Chi
 애플사의 iPhone 에 주로 탑재되며, 애플사에서 만든 기기에만 탑재된다는 특징이 있다.
 
 3. 퀄컴의 스냅드래곤(Snapdragon)
-![Snapdragon Gen 3](../resource/imgSnapdragonGen3.jpg)
+![Snapdragon Gen 3](../resource/level0_1/imgSnapdragonGen3.jpg)
 *Snapdragon Gen 3*
 
 안드로이드 운영체제가 탑재된 스마트폰에 대거 탑재되어왔으며, 최근 미디어텍 사에서 만든 디멘시티의 급격한 성장으로 점유율이 줄어들었다.
 
 
 4. 엔비디아의 테그라(Tegra)
-![테그라 X1](../resource/imgTegraX1.jpg)
+![테그라 X1](../resource/level0_1/imgTegraX1.jpg)
 *테그라 x1*
 
 엔비디아에서 만든 AP인 Tegra 시리즈는 그래픽 연산에 특화되어있으며, 
