@@ -87,12 +87,33 @@
 <br>
 
 ### iOS에서의 프로세스와 스레드 관리 방법
+**프로세스 관리 방법**
+iOS의 프로세스(앱)는 기본적으로 **시스템(iOS) 에 의해 관리**되며, 사용자가 앱을 실행 및 종료하거나 시스템 메모리 부족, 앱 업데이트 등의 이벤트가 일어나면 메모리에 할당 또는 해제된다.
+
+**스레드 관리 방법**
+iOS의 스레드 관리 방법을 알아보기에 앞서, iOS에서 사용되는 스레드에 대해 알아보자.
+
 iOS 앱(프로세스)에서는 기본적으로 앱이 실행될 때 제공되는 스레드를 
 `메인 스레드(Main Thread)`라고 부르며,
 일반적으로 개발자가 작성한 코드는 `메인 스레드`에서 동작한다.
 
 이 `메인 스레드` 는 `UI 스레드` 라고도 불리는데, 사용자와 상호작용하는 
 UI 처리는 모두 이 `메인 스레드`에서 진행되어야하기 때문이다.
+> UI 처리를 하나의 스레드가 **모두 전담하는 이유**는 동시에 여러개의 스레드가 하나의 UI 를 변경할경우, **UI 충돌가능성** 이 있기 때문이다.
+> 또 과도한 작업을 정해진 시간에 처리하지 못할경우, 시스템이 앱이 멈췄음을 감지하고 오류를 발생시킴으로서 무거운 작업을 미연에 방지할 수 있다는 장점이 있다.
+
+`메인 스레드(= Main Thread, Interface Thread)`를 제외한 나머지 스레드는 모두 `백그라운드 스레드(Background Thread or Global Thread)` 라고 불리며 이 스레드들은 다양한 작업을 수행한다.
+ex) 이미지 다운로드, 음원 재생, 파일 업로드 등
+
+iOS 에서 이러한 스레드들은 개발자가 직접적으로 **생성 및 제거를 할 수 없으며**, 단지 스레드에게 작업의 우선순위와, 어떤 방식으로 동작할지만 정의한다.
+
+그렇다면 어떻게 이러한 스레드들을 처리할 수 있을까?
+iOS 에서는 **GCD(Grand Central Dispatch)** 를 통해 스레드를 관리한다.
+
+**Grand Central Dispatch**
+**GCD** 는 **Dispatch Queue API**를 제공하는데, 개발자가 하고싶은작업을 **Dispatch Queue** 에 전달하면 스레드를 `적절하게 생성`해서 분배해주며 작업이 종료된 후 스레드를 `제거 하는 역할`을 한다.
+
+
 
 <br>
 
@@ -118,3 +139,7 @@ UI 처리는 모두 이 `메인 스레드`에서 진행되어야하기 때문이
 - https://velog.io/@coastby/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C-IPC-Inter-Process-Communication-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EA%B0%84-%ED%86%B5%EC%8B%A0 (프로세스간 통신)
 - https://www.youtube.com/watch?v=x-Lp-h_pf9Q (프로세스와 스레드의 차이 [영상])
 - https://hyunndyblog.tistory.com/178 (iOS 에서의 Thread, GCD)
+- https://luke-kong.oopy.io/a94ce6b2-8379-409f-92d2-19ee2f218947 (iOS 에서의 멀티 스레딩)
+- https://asuhdevstory.tistory.com/entry/MainUI-Thread-%EB%9E%80-Worker-Thread-%EB%9E%80 (Worker Thread 란)
+- https://velog.io/@syong_e/TIL-UI%EC%9E%91%EC%97%85%EC%9D%80-%EC%99%9C-%EB%A9%94%EC%9D%B8%EC%8A%A4%EB%A0%88%EB%93%9C%EC%9D%B8%EA%B0%80 (UI 작업은 왜 메인스레드인가)
+- https://babbab2.tistory.com/65 (GCD)
