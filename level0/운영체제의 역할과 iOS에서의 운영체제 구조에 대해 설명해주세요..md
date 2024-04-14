@@ -131,13 +131,49 @@ iOS 에서는 **GCD(Grand Central Dispatch)** 를 통해 스레드를 관리한�
 
 `더 자세한 내용과 실제 사용방법은 2레벨의 1번 질문에서 자세히 다루도록 하겠다.`
 
-
 <br>
 
 # iOS 에서 사용되는 메모리 관리 기법
+iOS 에서는 **ARC(Auto Reference Counting)** 라는 방식으로 메모리사용을 추적하고 관리한다.
 
+**ARC**에 알기전에 먼저 `weak` 와 `strong` 개념에 대해 알아보자
 
-`더 자세한 내용과 실제 사용방법은 2레벨의 4번 질문에서 자세히 다루도록 하겠다.`
+**weak & strong**
+Swift 에서는 `weak` 와 `strong` 키워드를 지원하는데, 객체가 생성될 때 어떤 방식으로 참조할 건지 결정하는 방식이다.
+
+아무런 명시를 해주지 않았다면 `strong` 을 가지며, `강한참조`라고 부른다.
+변수 명 앞에 weak 가 선언되어있다면 `약한참조` 이다.
+
+변수를 어떻게 참조하느냐에 따라서 `참조 카운팅(Refrence Count)`에 변화가 생기는데 이제 ARC에 대해 알아보자.
+
+**ARC**
+ARC(Auto Reference Counting) 은 `참조 카운트`라는 방식을 통해 객체가 참조하고있는 숫자를 세어서 객체의 **할당해제여부를 판단**한다.
+
+ARC 는 객체가 생성되면 객체에 대한 `참조 카운트`를 하나 **증가**시키며, 객체가 제거되면 `참조 카운트`를 하나 **감소**시킨다.
+
+`참조 카운트` 가 **0**이 되면 객체를 제거하며, 메모리에서 할당 해제 된다.
+
+`strong` 으로 선언된 객체는 생성될 때 참조 카운트를 하나 증가시킨다.
+그에 반해 `weak` 로 선언된 객체는 생성될 때 참조 카운트가 증가되지않는다.
+
+```swift
+var strongRef = Person(name: "구태호")
+```
+
+`strongRef`는 `strong`으로 **Person** 객체를 참조하고 있으며 참조 카운트는 `1` 이다.
+
+```swift
+strongRef = nil
+```
+`strongRef`에 **nil**을 할당함으로써 참조를 제거하며, 참조카운트가 `0` 으로 변경되어 메모리에서 해제된다.
+
+아래 예시를 보자
+```swift
+class House {
+    var name: String?
+    var 
+}
+```
 
 <br>
 
@@ -164,3 +200,5 @@ iOS 에서는 **GCD(Grand Central Dispatch)** 를 통해 스레드를 관리한�
 - https://velog.io/@syong_e/TIL-UI%EC%9E%91%EC%97%85%EC%9D%80-%EC%99%9C-%EB%A9%94%EC%9D%B8%EC%8A%A4%EB%A0%88%EB%93%9C%EC%9D%B8%EA%B0%80 (UI 작업은 왜 메인스레드인가)
 - https://babbab2.tistory.com/65 (GCD)
 - https://sujinnaljin.medium.com/ios-%EC%B0%A8%EA%B7%BC%EC%B0%A8%EA%B7%BC-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94-gcd-5-c8e6eee3327b (ios 차근차근 시작하는 gcd)
+- https://babbab2.tistory.com/27 (strong , weak, unowned, 순환 참조)
+- https://medium.com/@yong076/ios-%EA%B0%9C%EB%B0%9C%EC%97%90%EC%84%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EA%B4%80%EB%A6%AC-%EB%B0%8F-%EC%B5%9C%EC%A0%81%ED%99%94-%EB%B0%A9%EB%B2%95-7bed8cac54b4 (ios 메모리 관리 및 최적화 방법)
