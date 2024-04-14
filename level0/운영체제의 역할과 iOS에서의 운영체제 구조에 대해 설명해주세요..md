@@ -167,13 +167,46 @@ strongRef = nil
 ```
 `strongRef`에 **nil**을 할당함으로써 참조를 제거하며, 참조카운트가 `0` 으로 변경되어 메모리에서 해제된다.
 
+**순환참조문제**
+순환참조란 두 객체가 **서로를 강하게 참조**하여, 두 객체의 참조를 제거했음에도 해제되지않는 문제를 말한다.
+
 아래 예시를 보자
 ```swift
-class House {
-    var name: String?
-    var 
+class Man {
+    var house: House?
+
+    deinit {
+        print("Man 해제")
+    }
 }
+
+class House {
+    var man: Man?
+
+    deinit {
+        print("House 해제")
+    }
+}
+
+var man: Man? = Man()
+var house: House? = House()
+
+man?.house = house
+house?.man = man
+
+man = nil
+house = nil
 ```
+
+Man 클래스는 House 클래스를 가지고 있고, House 클래스는 Man 클래스를 가지고 있다.
+
+man 인스턴스는 house 인스턴스를 참조하며, house 인스턴스는 man 인스턴스를 참조한다.
+
+man 과 house 인스턴스의 참조를 nil 로 변경한다.
+
+두 인스턴스의 참조는 nil 이 되었기 때문에 `deinit` 메소드가 호출되어야하지만 호출 되지않는다.
+
+이는 `strong` 으로 선언된 
 
 <br>
 
