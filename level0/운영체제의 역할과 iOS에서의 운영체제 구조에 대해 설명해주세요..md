@@ -204,15 +204,53 @@ man 인스턴스는 house 인스턴스를 참조하며, house 인스턴스는 ma
 
 man 과 house 인스턴스의 참조를 nil 로 변경한다.
 
-두 인스턴스의 참조는 nil 이 되었기 때문에 `deinit` 메소드가 호출되어야하지만 호출 되지않는다.
+두 인스턴스의 참조는 nil 이 되었기 때문에 `deinit` 메소드가 호출되어야하지만 호출되지않는다.
 
-이는 `strong` 으로 선언된 
+그 이유는 다음과 같다
+1. `man` 변수에 Man 인스턴스가 **할당될 때** 참조 카운트 1 증가(총합 1)
+2. `house.man` 변수에 `man` 변수의 참조 전달 참조 카운트 1 증가(총합 2)
+3. `man` 변수에 **nil 할당** 참조 카운트 참조 카운트 1 감소(총합 1)
+
+`man` 의 참조 카운트는 아직 1이 남은 상태이지만, Man의 `deinit` 이 호출되지않으며, 더 이상 참조할 수 없기 때문에 메모리 누수가 일어난다.
 
 <br>
 
 # iOS 의 샌드박스(SandBox)란?
 ### 샌드박스란?
+![앱 샌드박스](../resource/level0_2/imgAppSandBox.png)  
+*앱 샌드박스*  
+
+> 샌드박스(sandbox)란 외부로부터 들어온 프로그램이 보호된 영역에서 동작해 시스템이 부정하게 조작되는 것을 막는 보안 형태이다.
+
+**샌드박스** 는 악의적인 목적을 가진 개발자가 컴퓨터의 시스템 자원이나 사용자의 개인정보에 함부로 접근하지 못하도록 접근을 제한하는 개념을 말한다.
+
+iOS 에서는 각각의 App 마다 모두 `샌드박스`가 적용되어있으며, 앱은 자기자신만의 **샌드박스 디렉토리를 할당**받아, 필요한 경우 이곳에 저장한다.
+
+이 샌드박스 디렉토리는 **타 앱에서 접근**할 수 없다.
+
+**샌드박스 디렉토리의 구성**
+- Bundle Container: 앱 번들이 포함된 디렉토리
+- Data Container: (사용자나 앱에의해) 생성된 데이터가 포함된 디렉토리
+- iCloud Container: 런타임 시점에 접근을 요청할 수 있는 디렉토리
+
+
+
 ### 앱 간 데이터 공유 방법
+iOS의 샌드박스 정책으로 인해, `파일 시스템`에 접근하여 앱간 데이터를 공유하는 방식이 불가능하다.
+
+그럼에도 다양한 방식으로 앱 간 데이터 공유가 가능하다.
+
+1. 클립보드(UIPasteBoard)  
+시스템 클립보드에 저장하는 PasteBoard API를 사용하면 앱 간 데이터 공유가 가능하다.
+2. 앱 그룹(App Groups)  
+동일한 팀이 개발한 앱 간 공유 컨테이너에 액세스하여 데이터를 쉽게 공유하는 방식이다.
+3. 앱 스킴(URL Scheme)  
+앱 고유의 URL 형식을 정의하고, 외부에서 해당 URL을 호출하여 앱을 엶과 동시에 URL에 포함된 데이터를 사용할 수 있는 방식이다.
+4. 공유 패널(UIActivityViewController)  
+![공유 패널](../resource/level0_2/imgUIApplicationViewController.png)  
+*공유 패널*  
+클립보드, 타 앱, 파일시스템에 정보를 저장할 수 있는 기능을 가진 API 이다.
+
 
 
 <br>
@@ -235,3 +273,7 @@ man 과 house 인스턴스의 참조를 nil 로 변경한다.
 - https://sujinnaljin.medium.com/ios-%EC%B0%A8%EA%B7%BC%EC%B0%A8%EA%B7%BC-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94-gcd-5-c8e6eee3327b (ios 차근차근 시작하는 gcd)
 - https://babbab2.tistory.com/27 (strong , weak, unowned, 순환 참조)
 - https://medium.com/@yong076/ios-%EA%B0%9C%EB%B0%9C%EC%97%90%EC%84%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EA%B4%80%EB%A6%AC-%EB%B0%8F-%EC%B5%9C%EC%A0%81%ED%99%94-%EB%B0%A9%EB%B2%95-7bed8cac54b4 (ios 메모리 관리 및 최적화 방법)
+- https://ko.wikipedia.org/wiki/%EC%83%8C%EB%93%9C%EB%B0%95%EC%8A%A4_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EB%B3%B4%EC%95%88) (샌드박스 (컴퓨터 보안))
+- https://blog.naver.com/doctor-kick/222447929246 (앱 샌드박스)
+- https://developer.apple.com/documentation/xcode/configuring-app-groups (앱 그룹 구성)
+- https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app (URL Scheme)
